@@ -5,7 +5,7 @@ Interactive guitar DSP learning app — visual guides, concept deep-dives, and h
 **Live site:** [krythonix.github.io/dsp-lab](https://krythonix.github.io/dsp-lab/)  
 **Repository:** [github.com/krythonix/dsp-lab](https://github.com/krythonix/dsp-lab)
 
-**Related repos (separate git projects):** `dsp-lab-desktop`, `dsp-lab-mobile`, `dsp-lab-shared` — grouped locally in a [dsp-lab-workspace](https://github.com/krythonix/dsp-lab#related-projects) folder for development.
+**Related repos (separate git projects):** `dsp-lab-desktop`, `dsp-lab-mobile`, `dsp-lab-shared` — see [Related projects](#related-projects) below.
 
 Use the **Menu** in the top-right to navigate. All routes are hash-based (e.g. `#/distortion-lab`), which works on GitHub Pages without a server.
 
