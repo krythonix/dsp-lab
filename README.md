@@ -5,6 +5,8 @@ Interactive guitar DSP learning app — visual guides, concept deep-dives, and h
 **Live site:** [krythonix.github.io/dsp-lab](https://krythonix.github.io/dsp-lab/)  
 **Repository:** [github.com/krythonix/dsp-lab](https://github.com/krythonix/dsp-lab)
 
+**Related repos (separate git projects):** `dsp-lab-desktop`, `dsp-lab-mobile`, `dsp-lab-shared` — grouped locally in a [dsp-lab-workspace](https://github.com/krythonix/dsp-lab#related-projects) folder for development.
+
 Use the **Menu** in the top-right to navigate. All routes are hash-based (e.g. `#/distortion-lab`), which works on GitHub Pages without a server.
 
 ## What’s inside
@@ -102,6 +104,19 @@ public/
 ## Audio demo
 
 Labs loop a clean guitar sample from `public/audio/clean-guitar-demo.mp3`. Live input requires microphone permission in the browser (HTTPS required — works on GitHub Pages).
+
+## Related projects
+
+This repo is **web only**. Native apps are separate repositories:
+
+| Repo | Purpose |
+| --- | --- |
+| **dsp-lab** (this) | Browser learning app |
+| **dsp-lab-desktop** | JUCE live app (Mac/Windows) |
+| **dsp-lab-mobile** | iOS/Android (planned) |
+| **dsp-lab-shared** | C++ DSP core for desktop + mobile |
+
+For local development, clone all four into one parent folder and open `dsp-lab.code-workspace` — see the workspace README in your `dsp-lab-workspace` checkout.
 
 ## License
 
