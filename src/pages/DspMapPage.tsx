@@ -1,6 +1,9 @@
 import { bonusConcepts, concepts, coreConcepts } from '../content/concepts'
 import { DspMapDiagram } from '../diagrams/DspMapDiagram'
-import { navigate } from '../navigation'
+import { navigate, navMenu } from '../navigation'
+
+const comparisonsGroup = navMenu.find((group) => group.id === 'comparisons')
+const labsGroup = navMenu.find((group) => group.id === 'labs')
 
 const laterTopics = [
   { name: 'Fourier / frequency analysis', why: 'Deep filter design, spectral effects' },
@@ -140,35 +143,55 @@ export function DspMapPage() {
         </ul>
       </section>
 
-      <section className="section">
-        <h2>Deep-dive topic pages</h2>
-        <dl className="glossary">
-          <div>
-            <dt>
-              <button type="button" className="text-link" onClick={() => navigate({ type: 'harmonics' })}>
-                Harmonics — full guide
-              </button>
-            </dt>
-            <dd>Harmonic series, “are they all A?”, odd/even, and drive.</dd>
-          </div>
-          <div>
-            <dt>
-              <button type="button" className="text-link" onClick={() => navigate({ type: 'overdrive' })}>
-                Overdrive &amp; Distortion
-              </button>
-            </dt>
-            <dd>Concepts 3–5 in depth — clipping, transfer curves, waveforms.</dd>
-          </div>
-          <div>
-            <dt>
-              <button type="button" className="text-link" onClick={() => navigate({ type: 'fuzz-chorus' })}>
-                Fuzz &amp; Chorus
-              </button>
-            </dt>
-            <dd>Concepts 4 and 7–9 — hard clip vs time-based effects and LFO.</dd>
-          </div>
-        </dl>
-      </section>
+      {comparisonsGroup && (
+        <section className="section">
+          <h2>Comparison guides</h2>
+          <p className="lead">Visual side-by-side guides — waveforms, transfer curves, and signal flow.</p>
+          <ul className="concept-list">
+            {comparisonsGroup.items.map((item) => (
+              <li key={item.label}>
+                <button
+                  type="button"
+                  className="concept-card concept-card--link"
+                  onClick={() => navigate(item.route)}
+                >
+                  <span className="concept-card__num">{item.icon}</span>
+                  <div>
+                    <h3>{item.label}</h3>
+                    <p>{item.description}</p>
+                    <p className="concept-card__cta">Open guide →</p>
+                  </div>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {labsGroup && (
+        <section className="section">
+          <h2>Interactive labs</h2>
+          <p className="lead">Hands-on Web Audio demos — tweak controls and hear the result in real time.</p>
+          <ul className="concept-list">
+            {labsGroup.items.map((item) => (
+              <li key={item.label}>
+                <button
+                  type="button"
+                  className="concept-card concept-card--link"
+                  onClick={() => navigate(item.route)}
+                >
+                  <span className="concept-card__num">{item.icon}</span>
+                  <div>
+                    <h3>{item.label}</h3>
+                    <p>{item.description}</p>
+                    <p className="concept-card__cta">Open lab →</p>
+                  </div>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
   )
 }

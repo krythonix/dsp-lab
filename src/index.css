@@ -30,10 +30,11 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  flex-wrap: wrap;
   max-width: 960px;
   margin: 0 auto;
   padding: 20px 24px 0;
+  position: relative;
+  z-index: 20;
 }
 
 .site-nav__brand {
@@ -44,33 +45,149 @@ body {
   text-transform: uppercase;
 }
 
-.site-nav__links {
+.site-nav__menu {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  gap: 12px;
 }
 
-.site-nav__link {
+.site-nav__current {
+  font-size: 0.8125rem;
+  color: #78716c;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.site-nav__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border: 1px solid #2a2724;
   border-radius: 999px;
   background: #1a1816;
-  color: #a8a29e;
+  color: #e7e5e4;
   font: inherit;
   font-size: 0.8125rem;
+  font-weight: 500;
   padding: 8px 14px;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s;
 }
 
-.site-nav__link:hover {
-  border-color: #44403c;
+.site-nav__menu-btn:hover,
+.site-nav__menu-btn.active {
+  border-color: #d97706;
+  background: #292017;
+}
+
+.site-nav__menu-chevron {
+  font-size: 0.625rem;
+  color: #a8a29e;
+}
+
+.site-nav__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(320px, calc(100vw - 48px));
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+  border: 1px solid #2a2724;
+  border-radius: 12px;
+  background: #1a1816;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  padding: 8px;
+}
+
+.site-nav__section + .site-nav__section {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid #2a2724;
+}
+
+.site-nav__section-label {
+  margin: 0;
+  padding: 8px 10px 4px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #57534e;
+}
+
+.site-nav__section-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.site-nav__item:hover {
+  background: #242220;
+}
+
+.site-nav__item--active {
+  background: #292017;
+}
+
+.site-nav__item--active .site-nav__item-label {
+  color: #faf9f7;
+}
+
+.site-nav__item-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: #121110;
+  border: 1px solid #2a2724;
+  font-size: 0.75rem;
+  color: #a8a29e;
+}
+
+.site-nav__item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.site-nav__item-label {
+  font-size: 0.875rem;
+  font-weight: 500;
   color: #e7e5e4;
 }
 
-.site-nav__link.active {
-  border-color: #d97706;
-  background: #292017;
-  color: #faf9f7;
+.site-nav__item-desc {
+  font-size: 0.75rem;
+  color: #78716c;
+  line-height: 1.35;
+}
+
+@media (max-width: 520px) {
+  .site-nav__current {
+    display: none;
+  }
 }
 
 .section code {
@@ -683,4 +800,57 @@ body {
 
 .curve-editor--bypass {
   opacity: 0.75;
+}
+
+.chain-order {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.chain-order__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  border: 1px solid #2a2724;
+  border-radius: 10px;
+  background: #1a1816;
+  padding: 12px 14px;
+}
+
+.chain-order__item--bypass {
+  opacity: 0.65;
+}
+
+.chain-order__num {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: #121110;
+  border: 1px solid #2a2724;
+  font-size: 0.8125rem;
+  color: #a8a29e;
+}
+
+.chain-order__label {
+  flex: 1;
+  font-weight: 500;
+  color: #e7e5e4;
+  min-width: 120px;
+}
+
+.chain-order__actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pedal-btn--small {
+  padding: 6px 10px;
+  font-size: 0.75rem;
 }

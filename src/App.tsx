@@ -1,16 +1,42 @@
-import { useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
+import { SiteNav } from './components/SiteNav'
 import { ConceptDetailPage } from './pages/ConceptDetailPage'
-import { DspMapPage } from './pages/DspMapPage'
+import { ChainLabPage } from './pages/ChainLabPage'
+import { ChorusLabPage } from './pages/ChorusLabPage'
+import { CompressorLabPage } from './pages/CompressorLabPage'
 import { DelayLabPage } from './pages/DelayLabPage'
 import { DistortionLabPage } from './pages/DistortionLabPage'
+import { DspMapPage } from './pages/DspMapPage'
+import { FilterLabPage } from './pages/FilterLabPage'
 import { FuzzChorusPage } from './pages/FuzzChorusPage'
+import { GateLabPage } from './pages/GateLabPage'
 import { HarmonicsPage } from './pages/HarmonicsPage'
+import { HighPassLabPage } from './pages/HighPassLabPage'
 import { OverdrivePage } from './pages/OverdrivePage'
+import { PhaserLabPage } from './pages/PhaserLabPage'
+import { ReverbLabPage } from './pages/ReverbLabPage'
+import { TremoloLabPage } from './pages/TremoloLabPage'
+import { WahLabPage } from './pages/WahLabPage'
 import { navigate, parseHash, type Route } from './navigation'
 import './index.css'
 
 function readRoute(): Route {
   return parseHash(window.location.hash)
+}
+
+const labPages: Partial<Record<Route['type'], ReactNode>> = {
+  'distortion-lab': <DistortionLabPage />,
+  'delay-lab': <DelayLabPage />,
+  'chorus-lab': <ChorusLabPage />,
+  'filter-lab': <FilterLabPage />,
+  'tremolo-lab': <TremoloLabPage />,
+  'compressor-lab': <CompressorLabPage />,
+  'gate-lab': <GateLabPage />,
+  'highpass-lab': <HighPassLabPage />,
+  'wah-lab': <WahLabPage />,
+  'phaser-lab': <PhaserLabPage />,
+  'reverb-lab': <ReverbLabPage />,
+  'chain-lab': <ChainLabPage />,
 }
 
 export default function App() {
@@ -34,72 +60,17 @@ export default function App() {
     setRoute(next)
   }
 
-  const isMap = route.type === 'map'
-  const isOverdrive = route.type === 'overdrive'
-  const isFuzzChorus = route.type === 'fuzz-chorus'
-  const isHarmonics = route.type === 'harmonics'
-  const isDistortionLab = route.type === 'distortion-lab'
-  const isDelayLab = route.type === 'delay-lab'
-  const isConcept = route.type === 'concept'
+  const labPage = route.type in labPages ? labPages[route.type as keyof typeof labPages] : null
 
   return (
     <>
-      <nav className="site-nav">
-        <button type="button" className="site-nav__brand site-nav__brand-btn" onClick={() => go({ type: 'map' })}>
-          Guitar DSP
-        </button>
-        <div className="site-nav__links">
-          <button
-            type="button"
-            className={isMap ? 'site-nav__link active' : 'site-nav__link'}
-            onClick={() => go({ type: 'map' })}
-          >
-            10 Concepts
-          </button>
-          <button
-            type="button"
-            className={isOverdrive ? 'site-nav__link active' : 'site-nav__link'}
-            onClick={() => go({ type: 'overdrive' })}
-          >
-            Overdrive &amp; Distortion
-          </button>
-          <button
-            type="button"
-            className={isDistortionLab ? 'site-nav__link active' : 'site-nav__link'}
-            onClick={() => go({ type: 'distortion-lab' })}
-          >
-            Distortion Lab
-          </button>
-          <button
-            type="button"
-            className={isDelayLab ? 'site-nav__link active' : 'site-nav__link'}
-            onClick={() => go({ type: 'delay-lab' })}
-          >
-            Delay Lab
-          </button>
-          <button
-            type="button"
-            className={isHarmonics ? 'site-nav__link active' : 'site-nav__link'}
-            onClick={() => go({ type: 'harmonics' })}
-          >
-            Harmonics
-          </button>
-          <button
-            type="button"
-            className={isFuzzChorus ? 'site-nav__link active' : 'site-nav__link'}
-            onClick={() => go({ type: 'fuzz-chorus' })}
-          >
-            Fuzz &amp; Chorus
-          </button>
-        </div>
-      </nav>
-      {isMap && <DspMapPage />}
-      {isOverdrive && <OverdrivePage />}
-      {isFuzzChorus && <FuzzChorusPage />}
-      {isDistortionLab && <DistortionLabPage />}
-      {isDelayLab && <DelayLabPage />}
-      {isHarmonics && <HarmonicsPage />}
-      {isConcept && <ConceptDetailPage slug={route.slug} />}
+      <SiteNav route={route} onNavigate={go} />
+      {route.type === 'map' && <DspMapPage />}
+      {route.type === 'overdrive' && <OverdrivePage />}
+      {route.type === 'fuzz-chorus' && <FuzzChorusPage />}
+      {route.type === 'harmonics' && <HarmonicsPage />}
+      {route.type === 'concept' && <ConceptDetailPage slug={route.slug} />}
+      {labPage}
     </>
   )
 }

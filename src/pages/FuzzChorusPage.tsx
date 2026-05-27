@@ -3,6 +3,7 @@ import { ChorusFlowDiagram } from '../diagrams/ChorusFlowDiagram'
 import { FuzzFlowDiagram } from '../diagrams/FuzzFlowDiagram'
 import { FuzzTransferCurveDiagram } from '../diagrams/FuzzTransferCurveDiagram'
 import { FuzzWaveformDiagram } from '../diagrams/FuzzWaveformDiagram'
+import { navigate } from '../navigation'
 
 export function FuzzChorusPage() {
   return (
@@ -12,7 +13,11 @@ export function FuzzChorusPage() {
         <p>
           Two classic guitar effects that work very differently: fuzz is heavy clipping that squashes
           each sample; chorus copies the signal and moves a delayed version against the original — no
-          clipping at all.
+          clipping at all. Try the live chorus in{' '}
+          <button type="button" className="text-link" onClick={() => navigate({ type: 'chorus-lab' })}>
+            Chorus Lab
+          </button>
+          .
         </p>
       </header>
 
