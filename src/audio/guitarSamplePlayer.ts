@@ -1,5 +1,5 @@
 /** Clean guitar sample bundled in /public/audio/ */
-export const CLEAN_GUITAR_SAMPLE_URL = '/audio/clean-guitar-demo.mp3'
+export const CLEAN_GUITAR_SAMPLE_URL = `${import.meta.env.BASE_URL}audio/clean-guitar-demo.mp3`
 
 let cachedBuffer: AudioBuffer | null = null
 
