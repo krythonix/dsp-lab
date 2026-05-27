@@ -65,13 +65,15 @@ npm run lint     # ESLint
 
 ## Deploy to GitHub Pages
 
-The repo includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that builds and deploys on every push to `main`.
+The repo builds with `base: '/dsp-lab/'` and deploys the **`dist/`** folder to the **`gh-pages`** branch on every push to `main`.
 
 1. In the repo go to **Settings → Pages → Build and deployment**
-2. Set **Source** to **GitHub Actions**
-3. Push to `main` — the site publishes to **https://krythonix.github.io/dsp-lab/**
+2. Set **Source** to **Deploy from a branch**
+3. Set **Branch** to **`gh-pages`** and folder **`/ (root)`**
+4. Push to `main` (or run **Actions → Deploy to GitHub Pages → Run workflow**)
+5. Site URL: **https://krythonix.github.io/dsp-lab/**
 
-Production builds use `base: '/dsp-lab/'` in `vite.config.ts`. Local dev uses `/` so paths stay simple.
+Do **not** deploy from the `main` branch root — that serves the dev `index.html` and causes a `404` on `/src/main.tsx`.
 
 ## Tech stack
 
