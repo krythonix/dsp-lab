@@ -1,73 +1,87 @@
-# React + TypeScript + Vite
+# DSP Lab
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interactive guitar DSP learning app — visual guides, concept deep-dives, and hands-on Web Audio labs. Built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+**Repository:** [github.com/krythonix/dsp-lab](https://github.com/krythonix/dsp-lab)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What’s inside
 
-## React Compiler
+### Concept map (`#/`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+A guided path through the core ideas behind guitar tone:
 
-## Expanding the ESLint configuration
+- 10 core concepts (sample, signal flow, clipping, harmonics, filters, delay, dry/wet, LFO, and more)
+- Bonus guides (compressor, noise gate, high-pass filter)
+- Effect lookup table — which concepts each pedal family needs
+- Click any concept for a full page with diagrams and guitar-focused examples
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Visual guides
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Route | Page |
+| --- | --- |
+| `#/overdrive` | Overdrive — soft clipping and tone shaping |
+| `#/fuzz-chorus` | Fuzz & chorus — extreme clipping and modulation |
+| `#/harmonics` | Harmonics — why clipped guitar sounds “full” |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Interactive labs
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Distortion Lab** (`#/distortion-lab`)
+
+- Live Web Audio waveshaper with soft, hard, and fuzz clip types
+- **Draggable transfer curve** — drag handles to shape the waveshaper in real time
+- Drive, tone, and output controls; bypass mode
+- Clean guitar demo loop or live mic/interface input
+- Live waveform scope and signal-flow diagram
+
+**Delay Lab** (`#/delay-lab`)
+
+- Delay time, feedback, mix, and output
+- Dry/wet flow diagram and echo timeline visualization
+- Same demo sample or live input
+
+## Getting started
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) and use the hash routes above (e.g. `#/distortion-lab`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Other scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build    # production build to dist/
+npm run preview  # preview production build
+npm run lint     # ESLint
 ```
+
+## Tech stack
+
+- **React 19** + **TypeScript**
+- **Vite** for dev and build
+- **Web Audio API** — `WaveShaperNode`, `DelayNode`, analysers, live input
+- Hash-based client routing (no server-side routes required)
+
+## Project layout
+
+```
+src/
+  audio/          # Web Audio graphs (distortion, delay, sample player)
+  components/     # Draggable transfer curve, waveform scope
+  content/        # Concept articles and metadata
+  diagrams/       # SVG diagrams for guides and labs
+  hooks/          # useDistortionEngine, useDelayEngine
+  pages/          # Route pages
+  navigation.ts   # Hash routing
+public/
+  audio/          # Clean guitar demo MP3 for labs
+```
+
+## Audio demo
+
+Labs loop a clean guitar sample from `public/audio/clean-guitar-demo.mp3`. Live input requires microphone permission in the browser.
+
+## License
+
+Private project — see repository owner for usage terms.
